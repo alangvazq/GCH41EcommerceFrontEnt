@@ -68,9 +68,9 @@ function validateForm(event) {
         formPasswordConfirm.classList.remove("is-invalid")
         confirmPassAlert.classList.add("d-none")
     }
-    console.log(isValid);
+
     if (isValid) {
-        document.getElementById('newUser').disabled = true;
+        //document.getElementById('newUser').disabled = true;
         // Crear objeto usuario
         let newUser = {
             nombre: formName.value.trim().replace(/\s+/g, ' '),
@@ -78,51 +78,64 @@ function validateForm(event) {
             telefono: formPhone.value,
             correo: formEmail.value.trim().toLowerCase(),
             contrasena: formPassword.value,
-            rol: "CLIENTE"
+            rol: "ADMINISTRADOR"
         }
         addUser(newUser);
-        
-        Swal.fire({
-            icon: "success",
-            title: "¡Registro exitoso!",
-            text: "¡Bienvenido a Joya del Caribe!",
-            showConfirmButton: false,
-        });
-        setTimeout(() => {
-            window.location.href = "../iniciosesion.html";
-        }, 2000);
     }
 }
 
 function addUser(userObject) {
-    /* // Agregar usuario al array de usuarios
-    userArray.push(userObject);
-    // Mandar el array de datos al localStorage
-    //          .agregarCosa Nombre de Cosa, lo volvemos string porque asi se leen los datos en el lS           
-    localStorage.setItem('userArray', JSON.stringify(userArray)); */
-    URL = "http://localhost:8080/api/usuarios/"
-    const promise = fetch(URL, 
-    {
-        method : 'POST',
-        body: JSON.stringify(userObject),
-        headers : {
-            'Content-Type': 'application/json',
-          }
-    })
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-    promise
-    .then((response) => {
-        response.json()
-            .then((json) => {
-                console.log( "Success: " + json);
-            })
-            .catch((error) => {
-                console.log('Hubo un problema con el JSON ' + error);
-            });
-    })
-    .catch((error) => {
-        console.log('Hubo un problema con la solicitud ' + error);
-    });
+    const raw = JSON.stringify(userObject);
+
+    const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+    };
+
+    fetch("/api/usuarios/", requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+            if (!result) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Error!',
+                    text: 'El usuario ya existe.',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Entendido',
+                    customClass: {
+                        popup: 'error-popup-class',
+                        title: 'error-title-class',
+                        confirmButton: 'error-confirm-button-class'
+                    }
+                });
+                
+                formEmail.classList.add("is-invalid");
+                formEmail.value = "";
+            } else{
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Registro exitoso!',
+                    text: 'Redirigiendo a la página de inicio de sesión...',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    customClass: {
+                        popup: 'success-popup-class',
+                        title: 'success-title-class',
+                        text: 'success-text-class'
+                    }
+                }).then(() => {
+                    window.location.href = "../../iniciosesion.html";
+                });
+                
+            }
+        })
+        .catch((error) => console.error(error));
 }
 
 function validacion(regex, form, alert) {

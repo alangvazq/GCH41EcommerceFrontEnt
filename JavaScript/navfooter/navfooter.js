@@ -1,19 +1,66 @@
-// Logo navbar
-/* <a class="navbar-brand" href="../../index.html"><img src="" alt="Logo"
-style="width: 140px;"></a> */
-
 let main = document.getElementsByTagName('main')[0];
 
-// Cargar los datos de usuarios desde localStorage
-const user = JSON.parse(localStorage.getItem('userArray')) || [];
-const login = JSON.parse(localStorage.getItem('userLogin')) || [];
+// obtener token de localStorage
+let token = localStorage.getItem('token');
+// obtener email de localStorage
+let email = localStorage.getItem('email');
 
-// Usar operador ternario para simplificar la asignación de valores
-const nombreUser = user.length > 0 ? user[0].email : "";
-const nombreLogin = login.length > 0 ? login[0].email : "";
+function buscarUsuario(token) {
+    return new Promise((resolve, reject) => {
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", token);
 
-// Asignar nombre basado en la comparación de correos, con operador ternario
-const nombreCuenta = nombreUser === nombreLogin && user.length > 0 ? user[0].name : "Cuenta";
+        const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow"
+        };
+
+        fetch("/api/usuarios/", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                
+                if (token && email) {
+                    let encontrado = false; // Indicador si se encontró el usuario
+                    result.forEach(usuario => {
+                        if(usuario.correo == email){
+                            nombreCuenta = usuario.nombre;
+                            console.log("Nombre de la cuenta: "+usuario.nombre);
+                            console.log("Correo de la cuenta: "+usuario.correo);
+                            encontrado = true;
+                        }
+                    });
+                    if (!encontrado) {
+                        nombreCuenta = "Iniciar Sesión";
+                    }
+                    resolve(nombreCuenta); // Resuelve la promesa con el valor de nombreCuenta
+                } else {
+                    reject("Token o email no proporcionado");
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                reject(error); // Rechaza la promesa si hay un error
+            });
+    });
+}
+
+async function iniciar() {
+    try {
+        const nombre = await buscarUsuario(token); // Espera a que buscarUsuario se complete
+        // Actualiza el DOM directamente aquí
+        document.querySelector('#nombreCuenta').textContent = nombre;
+    } catch (error) {
+        console.error("Error al buscar usuario:", error);
+    }
+}
+
+// Llama a iniciar en el momento adecuado, por ejemplo, después de cargar el DOM
+if(token && email){
+    document.addEventListener('DOMContentLoaded', iniciar);
+}
+
+
 
     main.insertAdjacentHTML('beforebegin', `
         <div class="border-bottom py-2 bg-light">
@@ -21,7 +68,7 @@ const nombreCuenta = nombreUser === nombreLogin && user.length > 0 ? user[0].nam
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <span class="d-none d-lg-inline-block d-md-inline-block d-sm-inline-block d-xs-none me-3"><strong><i
-                                class="bi bi-envelope-open-fill"></i> info@e-commerce.com</strong></span>
+                                class="bi bi-envelope-open-fill"></i> info@joyadelcaribe.com</strong></span>
                     <span class="me-3">
                         <strong><i class="bi bi-telephone-fill"></i> +52-55-1234-5678</strong></span>
                 </div>
@@ -34,8 +81,8 @@ const nombreCuenta = nombreUser === nombreLogin && user.length > 0 ? user[0].nam
     </div>
     <nav class="navbar navbar-expand-lg bg-white sticky-top navbar-light shadow-sm p-0">
         <div class="container">
-        <div style="height: 150px;"></div>
-        
+            <a class="navbar-brand" href="../../index.html"><img src="../../src/assets/profilePictures/Logo.png" alt="Logo"
+                    style="width: 100px;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -50,13 +97,16 @@ const nombreCuenta = nombreUser === nombreLogin && user.length > 0 ? user[0].nam
                         <a class="nav-link mx-2 text-uppercase" href="../../producto.html">Productos</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link mx-2 text-uppercase" href="../../nosotros.html">Nosotros</a>
+                    </li>
+                    <li class="nav-item" id="agregarProducto">
                         <a class="nav-link mx-2 text-uppercase" href="../../miPerfil.html">Agregar Producto</a>
                     </li>
                 </ul>
                     <ul class="navbar-nav ms-auto">
                         <div class="dropdown mb-3">
                             <a class="btn btn-secondary dropdown-toggle mx-2 text-uppercase" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-check-fill"></i> ${nombreCuenta}
+                                <i class="bi bi-person-check-fill"></i> <span id="nombreCuenta">Cuenta</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="../../iniciosesion.html">Iniciar Sesión</a></li>
@@ -81,7 +131,7 @@ const nombreCuenta = nombreUser === nombreLogin && user.length > 0 ? user[0].nam
             <!-- px-5 py-3 es un padding en x de 5 y en y de 3 -->
             <div class="col-md-6 col-lg-4 px-5 py-3">
                 <!-- La etiqueta i es un icono de bootstrap -->
-                <h5><i class="bi bi-bag-check px-2"></i>E-COMMERCE</h5>
+                <h5><i class="bi bi-bag-check px-2"></i>JOYA DEL CARIBE</h5>
                 <!-- La etiqueta ul es una lista no ordenada -->
                 <!-- dflex y flex-column son clases de bootstrap para alinear los elementos en columna -->
                 <ul class="d-flex flex-column">
@@ -105,7 +155,7 @@ const nombreCuenta = nombreUser === nombreLogin && user.length > 0 ? user[0].nam
             </div>
             <div class="col col-lg-4 px-5 py-3">
                 <!-- la etiqueta i es un icono de bootstrap -->
-                <h5><i class="bi bi-envelope px-2"></i>¿QUIERES MÁS DE E-COMMERCE?</h5>
+                <h5><i class="bi bi-envelope px-2"></i>¿QUIERES MÁS DE JOYA DEL CARIBE?</h5>
                 <p>Recibe los lanzamientos de productos, ofertas e historias más importantes directamente en tu
                     teléfono, además de un 20% de descuento en tu próximo pedido.</p>
                 <form>
@@ -131,7 +181,7 @@ const nombreCuenta = nombreUser === nombreLogin && user.length > 0 ? user[0].nam
         </div>
         <!-- text-center es una clase de bootstrap para centrar el texto -->
         <div class="container text-center">
-            <p><strong>© 2024 E-COMMERCE.</strong></p>
+            <p><strong>© 2024 Joya del Caribe. Todos los derechos reservados.</strong></p>
         </div>
         <!-- la clase footerPago es una clase de CSS para cambiar el color de fondo -->
         <div class="footerPago p-3">
@@ -184,11 +234,7 @@ function initializeFooterButton() {
 initializeFooterButton();
 
 function cerrarSesion() {
-    let sesion = JSON.parse(localStorage.getItem('userLogin'));
-    if (sesion == null) {
-        sesion = "";
-    } else {
-        localStorage.removeItem('userLogin');
-
-    }
+// borrar email de localStorage
+localStorage.removeItem('email');
+localStorage.removeItem('token');
 }
