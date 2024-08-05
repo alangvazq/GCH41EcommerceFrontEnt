@@ -16,8 +16,12 @@
 }
 
 .titulo p{
-    color: white;
+    color: rgb(43, 43, 43);
     font-size: 3.4rem;
+}
+
+.titulo a{
+    color: rgb(43, 43, 43);
 }
 
 .categoria-btn{
