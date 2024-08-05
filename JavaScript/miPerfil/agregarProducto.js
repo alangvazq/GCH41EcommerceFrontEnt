@@ -36,8 +36,8 @@ btnImagen.addEventListener('click', () => {
 }, false);
 
 widget_cloudinary = cloudinary.createUploadWidget({
-    cloudName: 'dqfqn6tnq',
-    uploadPreset: 'zrqhoanw'
+    cloudName: 'dqznhj5gq',
+    uploadPreset: 'vn3x1xra'
 }, (err, result) => {
     if (!err && result && result.event === 'success') {
         console.log('Imagen subida con éxito', result.info);

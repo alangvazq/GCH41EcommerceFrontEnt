@@ -15,7 +15,7 @@ mostrarTodo.addEventListener('click', () => {
         redirect: "follow"
     };
 
-    fetch("/api/productos/", requestOptions)
+    fetch("http://localhost:8080/api/productos/", requestOptions)
         .then((response) => response.text())
         .then((result) => {
             listarProductos(JSON.parse(result));
@@ -29,7 +29,7 @@ function getData() {
         redirect: "follow"
     };
 
-    fetch("/api/productos/", requestOptions)
+    fetch("http://localhost:8080/api/productos/", requestOptions)
         .then((response) => response.text())
         .then((result) => {
             listarProductos(JSON.parse(result));
@@ -81,7 +81,7 @@ document.querySelectorAll('.categoria-btn').forEach(btn => {
             redirect: "follow"
         };
 
-        fetch("/api/productos/", requestOptions)
+        fetch("http://localhost:8080/api/productos/", requestOptions)
             .then((response) => response.text())
             .then((result) => {
                 result = JSON.parse(result);
