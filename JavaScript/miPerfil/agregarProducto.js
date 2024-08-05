@@ -141,7 +141,7 @@ function sendData(objetoProducto, token) {
         redirect: "follow"
     };
 
-    fetch("/api/productos/", requestOptions)
+    fetch("http://localhost:8080/api/productos/", requestOptions)
         .then((response) => response.text())
         .then((result) => {
             // si es nulo el result, es porque no se pudo agregar el producto
