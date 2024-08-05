@@ -68,7 +68,7 @@ if(token && email){
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <span class="d-none d-lg-inline-block d-md-inline-block d-sm-inline-block d-xs-none me-3"><strong><i
-                                class="bi bi-envelope-open-fill"></i> info@joyadelcaribe.com</strong></span>
+                                class="bi bi-envelope-open-fill"></i> info@borcelle.com</strong></span>
                     <span class="me-3">
                         <strong><i class="bi bi-telephone-fill"></i> +52-55-1234-5678</strong></span>
                 </div>
@@ -81,8 +81,8 @@ if(token && email){
     </div>
     <nav class="navbar navbar-expand-lg bg-white sticky-top navbar-light shadow-sm p-0">
         <div class="container">
-            <a class="navbar-brand" href="../../index.html"><img src="../../src/assets/profilePictures/Logo.png" alt="Logo"
-                    style="width: 100px;"></a>
+            <a class="navbar-brand" href="../../index.html"><img src="../../src/assets/navbar/Logo.png" alt="Logo"
+                    style="width: 150px;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -95,9 +95,6 @@ if(token && email){
                     </li>
                     <li class="nav-item">
                         <a class="nav-link mx-2 text-uppercase" href="../../producto.html">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link mx-2 text-uppercase" href="../../nosotros.html">Nosotros</a>
                     </li>
                     <li class="nav-item" id="agregarProducto">
                         <a class="nav-link mx-2 text-uppercase" href="../../miPerfil.html">Agregar Producto</a>
