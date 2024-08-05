@@ -97,7 +97,7 @@ function addUser(userObject) {
         redirect: "follow"
     };
 
-    fetch("/api/usuarios/", requestOptions)
+    fetch("http://localhost:8080/api/usuarios/", requestOptions)
         .then((response) => response.text())
         .then((result) => {
             if (!result) {

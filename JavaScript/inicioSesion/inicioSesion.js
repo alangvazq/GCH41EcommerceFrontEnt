@@ -66,7 +66,7 @@ function inicioSesion(login) {
         redirect: "follow"
     };
 
-    fetch("/api/login/", requestOptions)
+    fetch("http://localhost:8080/api/login/", requestOptions)
         .then((response) => response.json())
         .then((result) => {
             if (result.accessToken) {
