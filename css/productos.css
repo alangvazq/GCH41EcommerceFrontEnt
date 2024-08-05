@@ -1,6 +1,6 @@
 .titulo {
     height: 25rem;
-    background-image: url(../src/assets/productosDesk/productImages/h2-rev-img-01.webp);
+    background-image: url(../src/assets/producto/bannerTitle.webp);
     background-size: cover;
     background-position: center;
 }
@@ -11,7 +11,7 @@
 
 .titutloSeccion{
     font-size: 2rem;
-    color: #000;
+    color: #2b2b2b;
     margin-bottom: 2rem;
 }
 

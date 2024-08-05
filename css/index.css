@@ -2,8 +2,12 @@ h1{
     color: #000;
 }
 
+#texto01-slide{
+    color: #353535;
+}
+
 h2{
-    color: rgb(19, 18, 18);
+    color: rgb(255, 255, 255);
 }
 
 *{
@@ -26,8 +30,8 @@ h2{
     background-color: white;
 }
 
-.opacity-75{
-    color: black;
+#text-gray{
+    color: #353535;
 }
 
 .bt-primary{
@@ -45,7 +49,6 @@ h2{
 
 .bt-primary:hover{
     background-color: #DA627D;
-    opacity: 66%;
 }
 
 @media(max-width: 767px) {
