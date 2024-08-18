@@ -14,8 +14,12 @@ section{
 }
 
 .border-color{
-    border-radius: .8rem;
-    border-color: #eed9d9;
+    /* border-radius: .8rem; */
+    transition: 0.3s;
+}
+
+.border-color:hover{
+    border-color: #ffc3da;
 }
 
 .registratebtn{
