@@ -128,7 +128,7 @@ if(token && email){
             <!-- px-5 py-3 es un padding en x de 5 y en y de 3 -->
             <div class="col-md-6 col-lg-4 px-5 py-3">
                 <!-- La etiqueta i es un icono de bootstrap -->
-                <h5><i class="bi bi-bag-check px-2"></i>JOYA DEL CARIBE</h5>
+                <h5><i class="bi bi-bag-check px-2"></i>BORCELLE</h5>
                 <!-- La etiqueta ul es una lista no ordenada -->
                 <!-- dflex y flex-column son clases de bootstrap para alinear los elementos en columna -->
                 <ul class="d-flex flex-column">
@@ -152,7 +152,7 @@ if(token && email){
             </div>
             <div class="col col-lg-4 px-5 py-3">
                 <!-- la etiqueta i es un icono de bootstrap -->
-                <h5><i class="bi bi-envelope px-2"></i>¿QUIERES MÁS DE JOYA DEL CARIBE?</h5>
+                <h5><i class="bi bi-envelope px-2"></i>¿QUIERES MÁS DE BORCELLE?</h5>
                 <p>Recibe los lanzamientos de productos, ofertas e historias más importantes directamente en tu
                     teléfono, además de un 20% de descuento en tu próximo pedido.</p>
                 <form>
@@ -178,7 +178,7 @@ if(token && email){
         </div>
         <!-- text-center es una clase de bootstrap para centrar el texto -->
         <div class="container text-center">
-            <p><strong>© 2024 Joya del Caribe. Todos los derechos reservados.</strong></p>
+            <p><strong>© 2024 Borcelle. Todos los derechos reservados.</strong></p>
         </div>
         <!-- la clase footerPago es una clase de CSS para cambiar el color de fondo -->
         <div class="footerPago p-3">
