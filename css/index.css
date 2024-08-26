@@ -10,15 +10,6 @@ h2{
     color: rgb(255, 255, 255);
 }
 
-*{
-    margin: 0;
-    padding: 0;
-
-    box-sizing: border-box;
-
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
 #banner{
     background-image: url(../src/assets/index/banner-1.webp);
     background-size: cover;
@@ -49,15 +40,4 @@ h2{
 
 .bt-primary:hover{
     background-color: #DA627D;
-}
-
-@media(max-width: 767px) {
-
-    .img-bg {
-        display: none;
-    }
-}
-
-@media(min-width:767px) {
-    
 }
